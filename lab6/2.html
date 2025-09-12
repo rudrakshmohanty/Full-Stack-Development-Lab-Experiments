@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Checker</title>
+    <!-- Google Font for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5em;
+        }
+        
+        #yearInput {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            margin-bottom: 1.5em;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        
+        #yearInput:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            margin-top: 1.5em;
+            font-size: 1.2em;
+            font-weight: 600;
+            min-height: 25px;
+        }
+        
+        .leap {
+            color: #27ae60; /* Green for leap year */
+        }
+
+        .not-leap {
+            color: #c0392b; /* Red for non-leap year */
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Leap Year Checker</h1>
+        <input type="text" id="yearInput" placeholder="Enter a year, e.g., 2024">
+        <button onclick="checkLeapYear()">Check Year</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkLeapYear() {
+            const yearString = document.getElementById('yearInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Clear previous result and classes
+            resultDiv.textContent = '';
+            resultDiv.classList.remove('leap', 'not-leap', 'error');
+
+            if (yearString.trim() === '') {
+                resultDiv.textContent = 'Please enter a year.';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            const year = parseInt(yearString, 10);
+
+            if (isNaN(year) || year < 0) {
+                resultDiv.textContent = 'Please enter a valid positive year.';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            // A year is a leap year if it is divisible by 4,
+            // except for end-of-century years, which must be divisible by 400.
+            // This logic covers all cases.
+            if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                resultDiv.textContent = `${year} is a leap year!`;
+                resultDiv.classList.add('leap');
+            } else {
+                resultDiv.textContent = `${year} is not a leap year.`;
+                resultDiv.classList.add('not-leap');
+            }
+        }
+    </script>
+
+</body>
+</html>

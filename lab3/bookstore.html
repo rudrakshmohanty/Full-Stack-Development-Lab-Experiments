@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Book Store - Enhanced UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* --- CSS Variables for Easy Theme Management --- */
+  :root {
+    --primary-color: #00796b; /* Teal */
+    --secondary-color: #004d40; /* Darker Teal */
+    --accent-color: #ffc107; /* Amber */
+    --background-color: #f4f6f8;
+    --text-color: #333;
+    --light-gray: #e0e0e0;
+    --white: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+  }
+
+  /* --- General Body & Reset Styles --- */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* --- Header --- */
+  header {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(0, 77, 64, 0.3);
+  }
+
+  /* --- Navigation Bar --- */
+  nav {
+    background: var(--white);
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav a {
+    color: var(--primary-color);
+    margin: 0 18px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  nav a:hover {
+    color: var(--secondary-color);
+    background-color: #e0f2f1; /* Light teal background on hover */
+    transform: translateY(-2px);
+  }
+  
+  nav a .fa-solid {
+    margin-right: 8px;
+  }
+
+  /* --- Main Content Area --- */
+  main {
+    display: flex;
+    flex-grow: 1;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  /* --- Sidebar (Aside) --- */
+  aside {
+    width: 240px;
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0; /* Prevents sidebar from shrinking */
+  }
+
+  aside h3 {
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+  }
+
+  aside a {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+
+  aside a:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateX(5px);
+  }
+
+  /* --- Main Section --- */
+  section {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  section h2 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  /* --- Book Grid & Card Styling --- */
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+  }
+
+  .book-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+
+  .book-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 77, 64, 0.2);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .book-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .book-card h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+  }
+
+  .book-card .author {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+  }
+  
+  .book-card .price {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+
+  /* --- Form Styling --- */
+  .form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+    background: #fafdfd;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+  }
+
+  .form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--secondary-color);
+  }
+
+  input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: var(--font-family);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 121, 107, 0.2);
+  }
+
+  /* --- Universal Button Style --- */
+  button {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--primary-color);
+    border: none;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background: var(--secondary-color);
+    transform: scale(1.02);
+  }
+  
+  /* --- Footer --- */
+  footer {
+    background: var(--secondary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 20px 0;
+    font-weight: 400;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    margin-top: auto; /* Pushes footer to the bottom */
+  }
+</style>
+</head>
+<body>
+
+<header>
+  Online Book Store 📚
+</header>
+<nav>
+  <a href="#" onclick="loadPage('home')"><i class="fa-solid fa-house"></i>Home</a>
+  <a href="#" onclick="loadPage('login')"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+  <a href="#" onclick="loadPage('register')"><i class="fa-solid fa-user-plus"></i>Registration</a>
+  <a href="#" onclick="loadPage('catalogue')"><i class="fa-solid fa-book-open"></i>Catalogue</a>
+  <a href="#" onclick="loadPage('cart')"><i class="fa-solid fa-cart-shopping"></i>Cart</a>
+</nav>
+<main>
+  <aside>
+    <h3>Departments</h3>
+    <a href="#" onclick="loadPage('cse')">Computer Science</a>
+    <a href="#" onclick="loadPage('ece')">Electronics & Comm.</a>
+    <a href="#" onclick="loadPage('eee')">Electrical</a>
+    <a href="#" onclick="loadPage('civil')">Civil Engineering</a>
+  </aside>
+  <section id="content">
+    </section>
+</main>
+
+<footer>
+  © 2025 Online Book Store | Email: support@bookstore.com
+</footer>
+<script>
+  // Helper function to create a book card
+  function createBookCard(imgSrc, title, author, price) {
+    return `
+      <div class="book-card">
+        <img src="${imgSrc}" alt="${title}">
+        <div class="book-card-content">
+          <div>
+            <h4>${title}</h4>
+            <p class="author">by ${author}</p>
+          </div>
+          <div>
+            <p class="price">₹${price}</p>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  const pages = {
+    home: `
+      <h2>Welcome to Our Redesigned Book Store!</h2>
+      <p>Explore our curated collection of books. Use the navigation to browse by department, manage your account, or view your cart. Happy reading!</p>
+    `,
+    login: `
+      <div class="form-container">
+        <h2 style="text-align:center;">User Login</h2>
+        <form>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    `,
+    register: `
+      <div class="form-container">
+        <h2 style="text-align:center;">Create an Account</h2>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="reg-password">Password:</label>
+          <input type="password" id="reg-password" name="password" required>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    `,
+    cart: `
+      <h2>Your Shopping Cart</h2>
+      <p>Your cart is currently empty. Start browsing the catalogue to add some books!</p>
+    `,
+    catalogue: `
+      <h2>Full Book Catalogue</h2>
+      <div class="book-grid">
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Programming\\nin C%23', 'Programming in C#', 'Harsh Bhasin', '200')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Computer\\nNetworks', 'Computer Networks', 'A. S. Tanenbaum', '400')}
+        ${createBookCard('https://placehold.co/400x600/ffc107/black?text=Web\\nProgramming', 'Web Programming', 'Chris Bates', '599')}
+        ${createBookCard('https://placehold.co/400x600/333/white?text=Data\\nStructures', 'Data Structures & Algos', 'Ravi Raj', '450')}
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Operating\\nSystems', 'Operating Systems', 'Philip C. Johnson', '550')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Fantasy\\nProgramming', 'Fantasy Programming', 'J.K. Rowling', '650')}
+      </div>
+    `,
+    cse: `
+      <h2>Computer Science Books</h2>
+      <div class="book-grid">
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Programming\\nin C%23', 'Programming in C#', 'Harsh Bhasin', '200')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Computer\\nNetworks', 'Computer Networks', 'A. S. Tanenbaum', '400')}
+        ${createBookCard('https://placehold.co/400x600/333/white?text=Data\\nStructures', 'Data Structures & Algos', 'Ravi Raj', '450')}
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Operating\\nSystems', 'Operating Systems', 'Philip C. Johnson', '550')}
+      </div>
+    `,
+    ece: `
+      <h2>Electronics & Comm. Books</h2>
+      <div class="book-grid">
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Signals\\nand Systems', 'Signals and Systems', 'Simon Haykin', '500')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Digital\\nSignal\\nProcessing', 'Digital Signal Processing', 'John G. Proakis', '650')}
+      </div>
+    `,
+    eee: `
+      <h2>Electrical Books</h2>
+      <div class="book-grid">
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Electronic\\nPrinciples', 'Electronic Principles', 'Albert Malvino', '480')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Basic\\nElectronics', 'Basic Electronics', 'Malvino', '520')}
+      </div>
+    `,
+    civil: `
+      <h2>Civil Engineering Books</h2>
+      <div class="book-grid">
+        ${createBookCard('https://placehold.co/400x600/00796b/white?text=Structural\\nAnalysis', 'Structural Analysis', 'R.C. Hibbeler', '550')}
+        ${createBookCard('https://placehold.co/400x600/004d40/white?text=Building\\nConstruction', 'Building Construction', 'James Ambrose', '600')}
+      </div>
+    `
+  };
+  
+  function loadPage(page) {
+    const content = document.getElementById('content');
+    if (pages[page]) {
+      content.innerHTML = pages[page];
+    } else {
+      content.innerHTML = `<h2>Page Not Found</h2><p>The page you requested does not exist.</p>`;
+    }
+  }
+  
+  // Load the home page by default when the script runs
+  document.addEventListener('DOMContentLoaded', () => {
+      loadPage('home');
+  });
+</script>
+</body>
+</html>

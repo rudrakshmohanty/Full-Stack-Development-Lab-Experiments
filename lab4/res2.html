@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image with Max-Width</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General page styling for a modern look */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* A container to center the content and give it a nice frame */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 2em;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #2d3e50;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            font-size: 1.1em;
+            text-align: center;
+            color: #555;
+            margin-bottom: 2em;
+        }
+
+        /* The core styles for the responsive image */
+        img {
+            /* This is the key property for responsive images.
+               The image will scale down but never grow larger than its actual size. */
+            max-width: 100%;
+            
+            /* This maintains the image's original aspect ratio as it scales. */
+            height: auto;
+            
+            /* These two properties center the image horizontally. */
+            display: block;
+            margin: 0 auto;
+            
+            /* Adding some nice visual touches */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Styling for the explanation section */
+        .explanation {
+            margin-top: 2.5em;
+            padding: 1.5em;
+            background-color: #f9f9f9;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .explanation code {
+            background-color: #e2e8f0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Responsive Images with <code>max-width</code></h1>
+        <p>The image below will shrink to fit smaller screens but will never stretch beyond its original size, preserving its quality. <strong>Try resizing your browser window to see it in action!</strong></p>
+        
+        
+        <img src="https://picsum.photos/id/1015/1000/600" alt="Responsive River Landscape">
+
+        <div class="explanation">
+            <h3>How It Works:</h3>
+            <ul>
+                <li><code>max-width: 100%;</code> ensures the image never overflows its container.</li>
+                <li><code>height: auto;</code> makes the browser calculate the height automatically to maintain the aspect ratio.</li>
+                <li><code>display: block;</code> and <code>margin: 0 auto;</code> are used to center the image neatly on the page.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

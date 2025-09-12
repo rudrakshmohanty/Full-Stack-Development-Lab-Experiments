@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Images: width vs. max-width</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 1.5em;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Common image styles */
+        img {
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove bottom space */
+            margin: 0 auto; /* Center the image */
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* * Problematic Method: width: 100%
+         * This forces the image to always fill its container,
+         * which can stretch a small image and make it blurry.
+        */
+        .problem-image {
+            width: 100%;
+        }
+
+        /* * Best Practice: max-width: 100%
+         * This allows the image to shrink if the container is smaller,
+         * but it will never grow larger than its original size.
+         * This prevents pixelation.
+        */
+        .best-practice-image {
+            max-width: 100%;
+        }
+        
+        code {
+            background-color: #e8f0fe;
+            color: #34559b;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Responsive Image Techniques</h1>
+        <p>This demo shows the difference between using <code>width</code> and <code>max-width</code> to make images responsive. <strong>Resize your browser to see the effect!</strong></p>
+
+        <section>
+            <h2>Problem: <code>width: 100%</code></h2>
+            <p>This image uses <code>width: 100%</code>. On a large screen, it stretches beyond its original size, causing it to look pixelated and blurry.</p>
+            
+            <img src="https://picsum.photos/id/104/400/250" alt="Pixelated landscape" class="problem-image">
+        </section>
+        
+        <section>
+            <h2>Best Practice: <code>max-width: 100%</code></h2>
+            <p>This image uses <code>max-width: 100%</code>. It scales down perfectly but never grows larger than its original 400px width, preserving its quality.</p>
+            
+            <img src="https://picsum.photos/id/104/400/250" alt="Responsive landscape" class="best-practice-image">
+        </section>
+    </div>
+
+</body>
+</html>

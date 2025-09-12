@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Design Demo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Basic reset and body styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Container to center content and set a max-width */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50; /* Dark Blue */
+            text-align: center;
+            font-size: 2.5em; /* 40px */
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em; /* 18px */
+            margin-bottom: 1.2em;
+        }
+
+        /* Responsive image styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 20px 0;
+        }
+
+        code {
+            background-color: #e8e8e8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* --- Media Query for Responsiveness --- */
+        /* This CSS will only apply when the screen width is 600px or less */
+        @media (max-width: 600px) {
+            body {
+                background-color: #eef1f5; /* Change background on mobile */
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em; /* Decrease heading size on smaller screens */
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Responsive Design</h1>
+        
+        
+
+        <p>
+            The <strong>viewport</strong> is the user's visible area of a web page. The viewport meta tag is crucial for responsive design, as it tells the browser how to control the page's dimensions and scaling.
+        </p>
+        <p>
+            The tag <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> has two key parts:
+        </p>
+        <ul>
+            <li><code>width=device-width</code> sets the width of the page to follow the screen-width of the device.</li>
+            <li><code>initial-scale=1.0</code> sets the initial zoom level when the page is first loaded by the browser.</li>
+        </ul>
+        <p>
+            This ensures that your website looks great on all devices, from small mobile phones to large desktop monitors. <strong>Try resizing your browser window to see the responsive changes in action!</strong>
+        </p>
+    </div>
+</body>
+</html>

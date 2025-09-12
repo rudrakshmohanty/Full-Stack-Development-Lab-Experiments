@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern CSS Demonstration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* * Modern CSS Best Practices:
+         * - CSS Variables for easy theme management.
+         * - A clean, readable font from Google Fonts.
+         * - A structured and spaced-out layout.
+        */
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #343a40;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --accent-color: #dc3545;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2em;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        section {
+            margin-bottom: 3em;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 2em;
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        h1, h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5em;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.8em;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        /* 1. Different Fonts and Text Styles */
+        .special-heading {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            text-decoration-thickness: 2px;
+        }
+
+        .code-text {
+            font-family: Consolas, "Courier New", monospace;
+            font-style: italic;
+            color: #e83e8c; /* A softer pink for code */
+            background-color: #f1f3f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* 2. Background Image for a Single Element */
+        .card-with-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://picsum.photos/id/1060/400/200");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding: 2em;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-with-bg:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3. Styles for Links & Customized Cursors */
+        .link-showcase a {
+            font-weight: 600;
+            text-decoration: none;
+            padding: 5px 0;
+            margin-right: 20px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .link-showcase a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .link-showcase a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .link-showcase a:link    { color: var(--primary-color); }
+        .link-showcase a:visited { color: #6f42c1; /* Purple */ }
+        .link-showcase a:active  { color: var(--accent-color); }
+        .link-showcase a:hover   { color: var(--secondary-color); }
+
+        .cursor-crosshair { cursor: crosshair; }
+        .cursor-help      { cursor: help; }
+        .cursor-pointer   { cursor: pointer; }
+        .cursor-wait      { cursor: wait; }
+
+        /* 4. Working with Layers (z-index) */
+        .layer-container {
+            position: relative; /* Establishes a stacking context */
+            height: 200px;
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 1em;
+        }
+
+        .layer {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: white;
+        }
+
+        .layer-back {
+            background: var(--secondary-color);
+            top: 20px;
+            left: 80px;
+            z-index: 1; /* Lower z-index, appears behind */
+        }
+
+        .layer-front {
+            background: var(--accent-color);
+            top: 40px;
+            left: 30px;
+            z-index: 2; /* Higher z-index, appears in front */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modern CSS Showcase</h1>
+
+        <section id="text-styles">
+            <h2>1. Text Styling</h2>
+            <p>This is standard paragraph text using our body font.</p>
+            <p><b>This is default bold text.</b></p>
+            <p><b class="special-heading">This is a special heading style.</b></p>
+            <p>This is text with a <span class="code-text">code-like style</span> applied to it.</p>
+        </section>
+
+        <section id="backgrounds">
+            <h2>2. Element Backgrounds</h2>
+            <div class="card-with-bg">
+                This 'card' has a background image with a semi-transparent overlay to ensure the text is readable. Hover over me!
+            </div>
+        </section>
+        
+        <section id="links-and-cursors">
+            <h2>3. Links & Custom Cursors</h2>
+            <p class="link-showcase">
+                <a href="#" class="cursor-crosshair">Crosshair Cursor</a>
+                <a href="#" class="cursor-help">Help Cursor</a>
+                <a href="#" class="cursor-wait">Wait Cursor</a>
+                <a href="#" class="cursor-pointer">Default Pointer</a>
+            </p>
+        </section>
+
+        <section id="layers">
+            <h2>4. Stacking with Z-Index</h2>
+            <p>The red box has a higher <code class="code-text">z-index</code> (2) than the dark box (1), so it appears on top.</p>
+            <div class="layer-container">
+                <div class="layer layer-front">Front (z-index: 2)</div>
+                <div class="layer layer-back">Back (z-index: 1)</div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Media Query Demo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Mobile First Styles (Default) --- */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            color: #1a253c;
+            margin-bottom: 20px;
+        }
+        
+        /* This box will show which layout is active */
+        .breakpoint-indicator {
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 1.2em;
+        }
+        
+        .breakpoint-indicator::before {
+            content: 'Layout: Mobile (< 768px)';
+        }
+
+        /* On mobile, cards are in a single column */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+           margin-top: 0;
+           color: #2c3e50;
+        }
+
+        /* --- Tablet Breakpoint --- */
+        @media screen and (min-width: 768px) {
+            body {
+                background-color: #e0e7ff; /* Lighter blue for tablet */
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .breakpoint-indicator {
+                background-color: #2ecc71; /* Green for tablet */
+            }
+            .breakpoint-indicator::before {
+                content: 'Layout: Tablet (≥ 768px)';
+            }
+            /* Switch to a row layout for the cards */
+            .card-container {
+                flex-direction: row;
+                flex-wrap: wrap; /* Allow cards to wrap to the next line */
+            }
+            .card {
+                /* Each card takes up roughly half the width */
+                flex-basis: calc(50% - 10px);
+            }
+        }
+
+        /* --- Desktop Breakpoint --- */
+        @media screen and (min-width: 1024px) {
+            body {
+                background-color: #d4f8e8; /* Lighter green for desktop */
+            }
+            h1 {
+                font-size: 3em;
+            }
+            .breakpoint-indicator {
+                background-color: #e74c3c; /* Red for desktop */
+            }
+            .breakpoint-indicator::before {
+                content: 'Layout: Desktop (≥ 1024px)';
+            }
+            .card {
+                /* Each card takes up roughly a third of the width */
+                flex-basis: calc(33.333% - 14px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Responsive Design with Media Queries</h1>
+        <div class="breakpoint-indicator"></div>
+
+        <div class="card-container">
+            <div class="card">
+                <h2>Card One</h2>
+                <p>On mobile screens, these cards will stack vertically in a single column.</p>
+            </div>
+            <div class="card">
+                <h2>Card Two</h2>
+                <p>As you increase the screen width past 768px, they will arrange into a row.</p>
+            </div>
+            <div class="card">
+                <h2>Card Three</h2>
+                <p>At 1024px and wider, they will fit perfectly in a three-column layout.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

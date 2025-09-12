@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Responsive Text with clamp()</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 2em;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        /*
+         * The Modern Way: Using clamp() for fluid typography.
+         * clamp(MINIMUM, PREFERRED, MAXIMUM);
+         * The font size will scale between the minimum and maximum values.
+        */
+        h1 {
+            text-align: center;
+            color: #1c2938;
+            /* Font will be at least 2rem, will try to be 1rem + 5vw, but will not exceed 3.5rem */
+            font-size: clamp(2rem, 1rem + 5vw, 3.5rem);
+        }
+
+        p {
+            /* Font will be at least 1rem, will try to be 0.9rem + 0.5vw, but will not exceed 1.2rem */
+            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+        }
+        
+        .explanation {
+            margin-top: 2em;
+            padding: 1.5em;
+            background-color: #f1f3f5;
+            border-left: 4px solid #0d6efd;
+            border-radius: 5px;
+        }
+        
+        .explanation h2 {
+           margin-top: 0;
+           font-size: 1.5em;
+        }
+
+        code {
+            background-color: #dee2e6;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Fluid Text Demo</h1>
+        
+        <p>
+            This text uses the modern CSS <code>clamp()</code> function to scale its font size. It smoothly adapts to the screen size while maintaining perfect readability. <strong>Resize your browser window</strong> to see how it works—it will never become too small or too large.
+        </p>
+
+        <div class="explanation">
+            <h2>The Power of <code>clamp()</code></h2>
+            <p>
+                Using just viewport width (<code>vw</code>) can make text unreadably small on phones or gigantic on large monitors. The <code>clamp()</code> function solves this by setting boundaries.
+            </p>
+            <p>
+                The syntax is <code>clamp(MIN, PREFERRED, MAX)</code>:
+            </p>
+            <ul>
+                <li><strong>MIN:</strong> The absolute minimum font size.</li>
+                <li><strong>PREFERRED:</strong> The ideal size that grows with the screen (e.g., <code>1rem + 0.5vw</code>).</li>
+                <li><strong>MAX:</strong> The absolute maximum font size.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <!-- Google Font for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5em;
+        }
+        
+        #stringInput {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            margin-bottom: 1.5em;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        
+        #stringInput:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            margin-top: 1.5em;
+            font-size: 1.2em;
+            font-weight: 600;
+            min-height: 25px;
+        }
+        
+        .palindrome {
+            color: #27ae60; /* Green for palindrome */
+        }
+
+        .not-palindrome {
+            color: #c0392b; /* Red for not a palindrome */
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Palindrome Checker</h1>
+        <input type="text" id="stringInput" placeholder="e.g., A man, a plan, a canal: Panama">
+        <button onclick="checkPalindrome()">Check String</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkPalindrome() {
+            const originalString = document.getElementById('stringInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Clear previous result and classes
+            resultDiv.textContent = '';
+            resultDiv.classList.remove('palindrome', 'not-palindrome', 'error');
+
+            if (originalString.trim() === '') {
+                resultDiv.textContent = 'Please enter a string.';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            // 1. Sanitize the string:
+            //    - Convert to lowercase to ignore case (e.g., 'Racecar' vs 'racecar').
+            //    - Remove all non-alphanumeric characters (spaces, punctuation, etc.).
+            const cleanedString = originalString.toLowerCase().replace(/[^a-z0-9]/g, '');
+            
+            // 2. Reverse the cleaned string:
+            //    - .split('') turns the string into an array of characters.
+            //    - .reverse() reverses that array.
+            //    - .join('') joins the characters back into a string.
+            const reversedString = cleanedString.split('').reverse().join('');
+
+            // 3. Compare the cleaned string with its reversed version.
+            if (cleanedString === reversedString) {
+                resultDiv.textContent = `"${originalString}" is a palindrome!`;
+                resultDiv.classList.add('palindrome');
+            } else {
+                resultDiv.textContent = `"${originalString}" is not a palindrome.`;
+                resultDiv.classList.add('not-palindrome');
+            }
+        }
+    </script>
+
+</body>
+</html>
