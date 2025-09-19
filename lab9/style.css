@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.card-header {
+    background-color: #343a40;
+    color: white;
+}
+
+.card-title {
+    margin-bottom: 0.25rem;
+}
+
+.table thead th {
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Tabledit Plugin Styles */
+.tabledit-input {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+}
+
+.tabledit-save-button, .tabledit-confirm-button {
+    background-color: #28a745 !important;
+    border: none !important;
+}
+
+.tabledit-edit-button, .tabledit-delete-button {
+    background-color: #007bff !important;
+    border: none !important;
+}
+
+.tabledit-delete-button {
+     background-color: #dc3545 !important;
+}
+
+.tabledit-toolbar-btn {
+    margin: 0 2px !important;
+}
