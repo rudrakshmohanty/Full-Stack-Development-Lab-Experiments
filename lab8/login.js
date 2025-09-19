@@ -3,12 +3,13 @@ const express = require('express');
 const session = require('express-session');
 const mysql = require('mysql');
 const path = require('path');
+const fs = require('fs'); // File System module to read HTML files
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root', 
-    password: 'Rudrax@3017',
+    user: 'root', // Your MySQL username
+    password: 'Rudrax@3017', // Your MySQL password
     database: 'lab8'
 });
 
@@ -30,26 +31,30 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Middleware to parse POST request bodies
+// Middleware to parse POST request bodies and serve static files
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve static files from the "static" directory
 app.use(express.static(path.join(__dirname, 'static')));
 
-// Define the route for the main login page
+
+// --- ROUTES ---
+
+// Route for the main login page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'login.html'));
 });
 
-// Define the authentication route
+// Route to serve the signup page
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'signup.html'));
+});
+
+// Route to handle login authentication
 app.post('/auth', (req, res) => {
     const { username, password } = req.body;
     if (username && password) {
-        // Query the database to find the user
-        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
+        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], (error, results) => {
             if (error) throw error;
-            // If a user is found
             if (results.length > 0) {
                 req.session.loggedin = true;
                 req.session.username = username;
@@ -65,18 +70,50 @@ app.post('/auth', (req, res) => {
     }
 });
 
-// Define the protected home page route
+// Route to handle new user registration
+app.post('/register', (req, res) => {
+    const { username, password, email } = req.body;
+    if (username && password && email) {
+        connection.query('SELECT * FROM accounts WHERE username = ?', [username], (error, results) => {
+            if (error) throw error;
+            if (results.length > 0) {
+                res.send('Username already exists!');
+            } else {
+                connection.query('INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)', [username, password, email], (err, result) => {
+                    if (err) throw err;
+                    req.session.loggedin = true;
+                    req.session.username = username;
+                    res.redirect('/home');
+                });
+            }
+            res.end();
+        });
+    } else {
+        res.send('Please fill out all fields!');
+        res.end();
+    }
+});
+
+
+// Route for the protected home page
 app.get('/home', (req, res) => {
-    // Check if the user is logged in
     if (req.session.loggedin) {
-        res.send(`Welcome back, ${req.session.username}! <br><a href="/logout">Logout</a>`);
+        // Read the home.html file
+        fs.readFile(path.join(__dirname, 'home.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.status(500).send("Error loading the page.");
+                return;
+            }
+            // Replace placeholder with the actual username and send the file
+            const personalizedHtml = data.replace('{{username}}', req.session.username);
+            res.send(personalizedHtml);
+        });
     } else {
         res.redirect('/');
     }
-    res.end();
 });
 
-// Define the logout route
+// Route for logging out
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -92,3 +129,4 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
