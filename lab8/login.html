@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login</title>
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Link to our stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Welcome Back!</h2>
+            <p>Please enter your details to sign in.</p>
+            <form action="/auth" method="post">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div class="login-art">
+            <img src="https://placehold.co/400x500/8e9aaf/ffffff?text=Secure+Login" alt="Login Art">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "nodelogin",
+  "version": "1.0.0",
+  "description": "A beautiful login system with Node.js and MySQL.",
+  "main": "login.js",
+  "scripts": {
+    "start": "node login.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql": "^2.18.1"
+  }
+}
